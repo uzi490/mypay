@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>VIP视频解析</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333333;
+        }
+        .mode {
+            display: flex;
+            align-items: center;
+        }
+        .mode span {
+            margin-right: 10px;
+        }
+        .mode select {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+        .input {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+        .input button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            background-color: #333333;
+            color: white;
+            cursor: pointer;
+        }
+        .video {
+            margin-top: 20px;
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            overflow: hidden;
+        }
+        .video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .footer {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .footer p {
+            color: #999999;
+        }
+        .footer a {
+            color: #333333;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">小宇VIP视频解析</div>
+            <div class="mode">
+                <span>选择解析线路：</span>
+                <select id="line">
+                    <option value="https://www.h8jx.com/jiexi.php?url=">高清无广告</option>
+                    <option value="https://vip.bljiex.com/?v=">广告少解析</option>
+                    <option value="https://jx.51flv.cc/?v=">试试是</option>
+                </select>
+            </div>
+        </div>
+        <div class="input">
+            <input type="text" id="url" placeholder="请输入视频链接，如：https://www.iqiyi.com/v_19rsho8w7c.html">
+            <button id="play">破解播放</button>
+            <button id="weixin">微信支付</button>
+        </div>
+        <div class="video">
+            <iframe id="video" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="footer">
+            <p>本站不生产解析接口，本站只做解析接口的搬运工，所以无法干预接口内容，请自行甄别接口/视频中可能附带的广告或恶意代码！
+			<br/>
+			本站由wsy利用ai生成，仅供学习交流，如有侵权，请联系删除！
+			<br/>
+			本人qq 2659438020
+			</p>
+        </div>
+    </div>
+    <script>
+        // 获取元素
+        var line = document.getElementById("line");
+        var url = document.getElementById("url");
+        var play = document.getElementById("play");
+        var video = document.getElementById("video");
+var weixin = document.getElementById("weixin");
+        // 绑定点击事件
+        play.onclick = function() {
+            // 获取输入的视频链接
+            var videoUrl = url.value.trim();
+            // 判断是否为空
+            if (videoUrl == "") {
+                alert("请输入视频链接！");
+                return;
+            }
+            // 获取选择的解析线路
+            var lineUrl = line.value;
+            // 拼接完整的解析链接
+            var parseUrl = lineUrl + videoUrl;
+            // 设置iframe的src属性为解析链接
+            video.src = parseUrl;
+        }
+		// 绑定点击事件
+        weixin.onclick = function() {
+            
+			
+        }
+    </script>
+</body>
+</html>
