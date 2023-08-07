@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mx.service.mapper.TOrderPayDao">
+
+    <resultMap type="com.mx.service.entity.TOrderPay" id="TOrderPayMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="total" column="total" jdbcType="INTEGER"/>
+        <result property="remain" column="remain" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+
+    <select id="veryBuy" resultType="int" >
+        SELECT IF(remain > 0,1,0) sta FROM t_order_pay where id = #{id}
+    </select>
+
+
+    <update id="updateByIdRemain">
+        update t_order_pay t
+        set t.remain = t.remain - 1
+        where t.id = #{id}
+    </update>
+
+
+</mapper>
+

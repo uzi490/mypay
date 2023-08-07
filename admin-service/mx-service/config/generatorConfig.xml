@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 引入 application.properties -->
+
+    <properties resource="mybatis-generator.properties" />
+
+    <classPathEntry location="D:\workrepo\repository-local\mysql\mysql-connector-java\8.0.28" />
+    <!-- MyBatis3Simple：不生成 Example相关类及方法 defaultModelType="flat" -->
+    <context id="context1" targetRuntime="MyBatis3Simple" >
+
+
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+<!--        <property name="beginningDelimiter" value="`"/>-->
+<!--        <property name="endingDelimiter" value="`"/>-->
+
+        <!-- pojo 实现序列化接口 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <!-- 指定生成 Mapper 的继承模板 -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.baomidou.mybatisplus.core.mapper.Mapper"/>
+            <property name="lombok" value="Data"/>
+            <property name="useMapperCommentGenerator" value="true"/>
+        </plugin>
+
+
+<!--        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">-->
+<!--            <property name="basePackage" value="${javaPackage}"/>-->
+<!--            <property name="targetProject" value="${services-dir}/src/main/java"/>-->
+<!--            <property name="targetPackage" value="${javaPackage}.logic"/>-->
+<!--            <property name="templatePath" value="generator/logic.ftl"/>-->
+<!--            <property name="mapperSuffix" value=""/>-->
+<!--            <property name="fileName" value="${tableClass.shortClassName}Logic.java"/>-->
+<!--            <property name="author" value="mx"/>-->
+<!--        </plugin>-->
+
+<!--        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">-->
+<!--            <property name="basePackage" value="${javaPackage}"/>-->
+<!--            <property name="targetProject" value="${api-dir}/src/main/java"/>-->
+<!--            <property name="targetPackage" value="${javaPackage}.service"/>-->
+<!--            <property name="templatePath" value="${generator}/service-interface.ftl"/>-->
+<!--            <property name="mapperSuffix" value=""/>-->
+<!--            <property name="fileName" value="I${tableClass.shortClassName}Service.java"/>-->
+<!--            <property name="author" value="mx"/>-->
+<!--        </plugin>-->
+
+<!--        &lt;!&ndash; service&ndash;&gt;-->
+<!--        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">-->
+<!--            <property name="basePackage" value="${javaPackage}"/>-->
+<!--            <property name="targetProject" value="${services-dir}/src/main/java"/>-->
+<!--            <property name="targetPackage" value="${javaPackage}.service.impl"/>-->
+<!--            <property name="templatePath" value="${generator}/service-impl.ftl"/>-->
+<!--            <property name="mapperSuffix" value=""/>-->
+<!--            <property name="fileName" value="${tableClass.shortClassName}ServiceImpl.java"/>-->
+<!--            <property name="author" value="mx"/>-->
+<!--        </plugin>-->
+
+        <!--注意context内的文件要按序放-->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+
+
+        <!-- jdbc 连接配置 -->
+        <jdbcConnection connectionURL="${jdbcURL}"
+                        driverClass="${driverClass}" password="${password}" userId="${user}">
+            <property name="remarksReporting" value="true"/>
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="${javaPackage}.entity" targetProject="${api-dir}\src\main\java" />
+
+
+
+        <!--
+       因为${dbType}.${module}连续的写法是无法获取配置项中值的，${dbType}.oracle.${module}在不连续的情况下是可以的，
+       所以使用..来模拟不连续的情况，${dbType}..${module}中的..可能被转化成了\\，即${dbType}\\${module}来创建文件夹。
+       如：cmd命令md dbType\\module创建出的就是dbType\module
+   -->
+        <!-- 对于生成的mapper.xml所在目录 -->
+        <sqlMapGenerator targetPackage="${javaPackage}.mapper" targetProject="${services-dir}\src\main\resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+
+        <!-- 配置mapper对应的java映射  也可以叫dao层 -->
+        <javaClientGenerator targetPackage="${javaPackage}.mapper" targetProject="${services-dir}\src\main\java" type="XMLMAPPER">
+        </javaClientGenerator>
+
+
+
+
+
+
+
+        <!-- table可以有多个,每个数据库中的表都可以写一个table，tableName表示要匹配的数据库表,也可以在tableName属性中通过使用%通配符来匹配所有数据库表,只有匹配的表才会自动生成文件 -->
+        <table tableName="t_user"  enableSelectByExample="true"
+               enableDeleteByExample="true" enableCountByExample="true"
+               enableUpdateByExample="true" selectByExampleQueryId="true">
+            <property name="ignoreQualifiersAtRuntime" value="false"/>
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+    </context>
+</generatorConfiguration>
